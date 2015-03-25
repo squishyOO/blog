@@ -1,0 +1,43 @@
+<div class="container">
+	<h1>Listing articles</h1>
+
+	<%= link_to 'New article', new_article_path %>
+	<div class="row">
+		<div class="col-xs-12">
+		<%= form_tag articles_path, method: :get do %>
+			  <%= text_field_tag :q, params[:q], placeholder: 'search' %>
+			  <%= submit_tag 'Search' %>
+			<% end %>
+			<table class="table">
+
+			<thead>
+				<tr>
+					<th>My Blog:</th>
+					<th>Content:</th>
+					<th colspan="2"></th>
+				</tr>
+			</thead>
+				
+
+			<% @articles.each do |article| %>
+				<tr>
+					<td><%= article.title %></td>
+					<td><%= article.text %></td>
+					<td>
+						<div class="btn-group" role="group">
+					<%= link_to 'Show', article_path(article), class: "btn btn-default" %>
+										<%= link_to 'Edit', edit_article_path(article), class: "btn btn-default" %>
+					<%= link_to 'Destroy', article_path(article),
+					         method: :delete,
+					         data: { confirm: 'Are you sure?'},
+					         class: "btn btn-danger" 
+					         %>
+					         </div>
+					         </td>
+				</tr>
+				<% end %>
+			</table>
+
+		</div>
+	</div>
+</div>
